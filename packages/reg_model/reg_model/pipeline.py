@@ -6,6 +6,11 @@ from reg_model.processing import preprocessors as pp
 from reg_model.processing import features
 from reg_model.config import config
 
+import logging
+
+
+_logger = logging.getLogger(__name__)
+
 
 price_pipe = Pipeline(
     [
