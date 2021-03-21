@@ -1,0 +1,8 @@
+# api
+flask==1.0.2
+
+# local regression_model package
+# update with your local path
+#Example : 
+#-e "C:\Users\ahmed\repos\ML-Model-Deployment-And-Testing\packages\reg_model"
+-e "SET_YOUR_LOCAL_PATH_HERE\ML-Model-Deployment-And-Testing\packages\reg_model"
