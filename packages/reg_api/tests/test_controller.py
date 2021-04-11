@@ -5,6 +5,8 @@ from reg_model import __version__ as _version
 import json
 import math
 
+from api import __version__ as api_version
+
 
 def test_health_endpoint_returns_200(flask_test_client):
     # When
@@ -14,9 +16,20 @@ def test_health_endpoint_returns_200(flask_test_client):
     assert response.status_code == 200
 
 
+def test_version_endpoint_returns_version(flask_test_client):
+    # When
+    response = flask_test_client.get('/version')
+
+    # Then
+    assert response.status_code == 200
+    response_json = json.loads(response.data)
+    assert response_json['model_version'] == _version
+    assert response_json['api_version'] == api_version
+
+
 def test_prediction_endpoint_returns_prediction(flask_test_client):
     # Given
-    # Load the test data from the regression_model package
+    # Load the test data from the reg_model package
     # This is important as it makes it harder for the test
     # data versions to get confused by not spreading it
     # across packages.
@@ -28,7 +41,6 @@ def test_prediction_endpoint_returns_prediction(flask_test_client):
                                       json=post_json)
 
     # Then
-    print("goooooooooood")
     assert response.status_code == 200
     response_json = json.loads(response.data)
     prediction = response_json['predictions']
